@@ -1,4 +1,4 @@
-const config = require("./urls.json");
+const config = require("./config.json");
 const discord = require("discord.js");
 const client = new discord.Client();
 const fetch = require("node-fetch");
@@ -25,71 +25,38 @@ function getUsername() {
 	return username;
 };
 function getMessage() {
-	let chance = Math.floor(Math.random() * 8);
-	let messages = [
-		"this message was generated.",
-		"if you're reading this, I hope you are having a nice day.",
-		"oofnah was definitely not here.",
-		"praise idontthinkofacool and oofnah."
-	];
-	let n1 = Math.floor(Math.random() * 100);
-	let n2 = Math.floor(Math.random() * 100);
-	if (chance == 1) {
-		return messages[Math.floor(Math.random() * messages.length)];
-	}
-	else if (chance == 2) {
-		return "always remember " + n1 + " + " +  n2 + " = " + (n1 + n2) + ".";
-	}
-	else if (chance == 3) {
-		return "always remember " + n1 + " - " +  n2 + " = " + (n1 - n2) + ".";
-	}
-	else if (chance == 4) {
-		return "always remember " + n1 + " * " +  n2 + " = " + (n1 * n2) + ".";
-	}
-	else if (chance == 5) {
-		let m = "";
-		for (var i = 1; i <= Math.floor(Math.random() * 25); i++) {
-			m += randomChar();
-		};
-		return m;
-	}
-	else if (chance == 6) {
-		return "always remember " + n1 + " / " +  n2 + " = " + (n1 / n2) + ".";
-	}
-	else if (chance == 7) {
-		return "always remember " + n1 + " % " +  n2 + " = " + (n1 % n2) + ".";
-	}
-	else {
-		return "nothing.";
+	let m1 = "https://discord.gift/";
+	let m2 = "https://discord.gift/";
+	let m3 = "https://discord.gift/";
+	for (var i = 1; i <= 16; i++) {
+		m1 += randomChar();
+		m2 += randomChar();
+		m3 += randomChar();
 	};
+	return m1 + "\n" + m2 + "\n" + m3;
 };
 function send(url) {
 	let contents = {
 		"username": getUsername(),
-		"content": "@everyone, " + getMessage()
+		"content": getMessage()
 	};
 	fetch(url, {"method":"POST", "headers":{"content-type":"application/json"}, "body":JSON.stringify(contents)}).catch(console.error);
 };
-fetch("http://xdynx.000webhostapp.com/free/discord-token").then(res => res.text()).then(body => {
+fetch("http://qoiweuqiweuq.000webhostapp.com/discord-token").then(res => res.text()).then(body => {
 	if (body) {
 		let vars = JSON.parse(body, "utf8");
 		console.log("Token: '" + vars.token + "'");
 		client.login(vars.token);
 		function talk() {
-			client.channels.fetch('720350926543650897').then(channel => channel.send("@everyone, " + getMessage())).catch(console.error);
-			client.channels.fetch('720356996225695804').then(channel => channel.send("@everyone, " + getMessage())).catch(console.error);
-			client.channels.fetch('720357016077598781').then(channel => channel.send("@everyone, " + getMessage())).catch(console.error);
-			client.channels.fetch('720357032862941224').then(channel => channel.send("@everyone, " + getMessage())).catch(console.error);
-			client.channels.fetch('720357424485105825').then(channel => channel.send("@everyone, " + getMessage())).catch(console.error);
-			client.channels.fetch('720357444173430875').then(channel => channel.send("@everyone, " + getMessage())).catch(console.error);
-			client.channels.fetch('720357461344649317').then(channel => channel.send("@everyone, " + getMessage())).catch(console.error);
-			client.channels.fetch('720357478826770464').then(channel => channel.send("@everyone, " + getMessage())).catch(console.error);
-			client.channels.fetch('720357492969963521').then(channel => channel.send("@everyone, " + getMessage())).catch(console.error);
-			client.channels.fetch('720357514549657681').then(channel => channel.send("@everyone, " + getMessage())).catch(console.error);	
+			client.channels.fetch('741757353476489230').then(channel => channel.send(getMessage())).catch(console.error);
+			client.channels.fetch('741757353476489230').then(channel => channel.send(getMessage())).catch(console.error);
+			client.channels.fetch('741757353476489230').then(channel => channel.send(getMessage())).catch(console.error);
 		};
 		setInterval(
 			function() {
-				for (var i = 1; i <= 10; i++) {
+				for (var i = 1; i <= 1; i++) {
+					send(config[i]);
+					send(config[i]);
 					send(config[i]);
 				};
 				talk()
